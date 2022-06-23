@@ -51,6 +51,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			newUser: async(email, password) => {
+				const opts = {
+					method: 'POST',
+					headers: { "Content-Type" : "application/json"},
+					body: JSON.stringify({
+						"email": "this should be a new email",
+						"password": "this should be a new password"
+					})
+				};
+
+				try{
+				const resp = await fetch('https://3001-christianma-authenticat-bqvjyp1j1ff.ws-eu47.gitpod.io/api/signup', opts)
+				
+					if(resp.status !== 200){ 
+					alert("there's an error before the 200");
+						return false
+				}
+				const data = await resp.json();
+					console.log("this came from the backend", data)
+					localStorage.setItem("token", data.access_token);
+					setStore({"token": data.access_token});
+					return true;
+				}
+				catch (error){
+					console.log("there's an error logging in ")
+				}
+			},
+
 			logout: () => {
 				localStorage.removeItem("token");
 				console.log("log out triggered")
@@ -58,9 +86,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 
 			getMessage: async () => {
+				const store = getStore();
+				const opts = {
+					headers: {
+					Authorization: "Bearer " + store.token 
+				}
+			}
 				try{
 					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
+					const resp = await fetch('https://3001-christianma-authenticat-bqvjyp1j1ff.ws-eu47.gitpod.io/api/hello', opts)
 					const data = await resp.json()
 					setStore({ message: data.message });
 					// don't forget to return something, that is how the async resolves
@@ -83,6 +117,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			syncTokenFromLocalStore: () => {
+				const token = localStorage.getItem("token") || null;
+				console.log(token, "this is the token");
+				setStore({token});
+				
 			}
 		}
 	};
