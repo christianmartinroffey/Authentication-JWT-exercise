@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			token: null,
 			message: null,
 			demo: [
 				{
@@ -20,6 +21,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
+		
+		
+			login: async(email, password) => {
+				const opts = {
+					method: 'POST',
+					headers: { "Content-Type" : "application/json"},
+					body: JSON.stringify({
+						"email": "test",
+						"password": "test"
+					})
+				};
+
+				try{
+				const resp = await fetch('https://3001-christianma-authenticat-bqvjyp1j1ff.ws-eu47.gitpod.io/api/token', opts)
+				
+					if(resp.status !== 200){ 
+					alert("there's an error before the 200");
+						return false
+				}
+				const data = await resp.json();
+					console.log("this came from the backend", data)
+					localStorage.setItem("token", data.access_token);
+					setStore({"token": data.access_token});
+					return true;
+				}
+				catch (error){
+					console.log("there's an error logging in ")
+				}
+			},
 
 			getMessage: async () => {
 				try{
@@ -33,6 +63,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+			
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
