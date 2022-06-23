@@ -51,6 +51,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			logout: () => {
+				localStorage.removeItem("token");
+				console.log("log out triggered")
+					setStore ({token: null});
+					},
+
 			getMessage: async () => {
 				try{
 					// fetching data from the backend
