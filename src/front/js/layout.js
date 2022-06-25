@@ -5,6 +5,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Login } from "./pages/Login";
+import Hello from "./pages/Hello";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 

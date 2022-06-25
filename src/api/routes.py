@@ -21,21 +21,22 @@ def create_token():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
-    @api.route("/hello", methods=["GET"])
-    @jwt_required()
-    def get_hello():
-   
-        dictionary = { 
-       "message": "hello world"
-    }
-    return jsonify(dictionary)
+@api.route("/hello", methods=["GET"])
+@jwt_required()
+ 
+def get_hello():
+   # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user, message="this is from the backend"), 200
 
-# needs a new endpoint to create a user using post /signup
+if __name__ == "__main__":
+    app.run()
+
+
+# /signup end point below
 # generate access token
-
-    @api.route("/signup", methods=["POST"])
-    @jwt_required()
-    def createNewUser():
+@api.route("/signup", methods=["POST"])
+def createNewUser():
         email = request.json.get("email", None)
         password = request.json.get("password", None)
         return jsonify({"msg": "error signing up"}), 401

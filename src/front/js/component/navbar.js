@@ -10,6 +10,9 @@ export const Navbar = () => {
 				<Link to="/">
 					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
 				</Link>
+				<Link to="/hello">
+					<span className="navbar-brand mb-0 h1">Go to the hello page</span>
+				</Link>
 				<div className="ml-auto">
 					{ !store.token ? (
 					<Link to="/login">
@@ -18,6 +21,7 @@ export const Navbar = () => {
 					) : (
 						<button className="btn btn-primary" onClick={() => actions.logout()} >Logout</button>
 					 )}
+					 
 				</div>
 			</div>
 		</nav>
