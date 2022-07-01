@@ -19,25 +19,28 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       // Use getActions to call a function within a fuction
-      exampleFunction: () => {
-        getActions().changeColor(0, "green");
-      },
+      // exampleFunction: () => {
+      //   getActions().changeColor(0, "green");
+      // },
 
       login: async (email, password) => {
         const opts = {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json",
+          
+         },
           body: JSON.stringify({
-            email: "test",
-            password: "test",
+            email: email,
+            password: password,
           }),
         };
 
         try {
           const resp = await fetch(
-            "https://3001-christianma-authenticat-bqvjyp1j1ff.ws-eu47.gitpod.io/api/token",
+            "https://3001-christianma-authenticat-8a7ewi7r7zw.ws-eu47.gitpod.io/api/token",
             opts
-          );
+            
+      )
 
           if (resp.status !== 200) {
             alert("there's an error before the 200");
@@ -58,16 +61,17 @@ const getState = ({ getStore, getActions, setStore }) => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            email: "this should be a new email",
-            password: "this should be a new password",
+            email: email,
+            password: password,
           }),
         };
 
         try {
           const resp = await fetch(
-            "https://3001-christianma-authenticat-bqvjyp1j1ff.ws-eu47.gitpod.io/api/signup",
+            " https://3001-christianma-authenticat-8a7ewi7r7zw.ws-eu47.gitpod.io/api/signup",
             opts
           );
+         
 
           if (resp.status !== 200) {
             alert("there's an error before the 200");
@@ -99,7 +103,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         try {
           // fetching data from the backend
           const resp = await fetch(
-            "https://3001-christianma-authenticat-bqvjyp1j1ff.ws-eu47.gitpod.io/api/hello",
+            "https://3001-christianma-authenticat-8a7ewi7r7zw.ws-eu47.gitpod.io/api/hello",
             opts
           );
           const data = await resp.json();
@@ -111,20 +115,21 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      changeColor: (index, color) => {
-        //get the store
-        const store = getStore();
+      // changeColor: (index, color) => {
+      //   //get the store
+      //   const store = getStore();
 
-        //we have to loop the entire demo array to look for the respective index
-        //and change its color
-        const demo = store.demo.map((elm, i) => {
-          if (i === index) elm.background = color;
-          return elm;
-        });
+      //   //we have to loop the entire demo array to look for the respective index
+      //   //and change its color
+      //   const demo = store.demo.map((elm, i) => {
+      //     if (i === index) elm.background = color;
+      //     return elm;
+      //   });
 
-        //reset the global store
-        setStore({ demo: demo });
-      },
+      //   //reset the global store
+      // //   setStore({ demo: demo });
+      // },
+
       syncTokenFromLocalStore: () => {
         const token = localStorage.getItem("token") || null;
         console.log(token, "this is the token");

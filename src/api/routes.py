@@ -15,8 +15,7 @@ api = Blueprint('api', __name__)
 def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    if email != "test" or password != "test":
-        return jsonify({"msg": "Bad username or password"}), 401
+   
 
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
@@ -37,8 +36,10 @@ if __name__ == "__main__":
 # generate access token
 @api.route("/signup", methods=["POST"])
 def createNewUser():
-        email = request.json.get("email", None)
-        password = request.json.get("password", None)
+        id = request.json.get(id, None)
+        email = request.json.get(email, None)
+        password = request.json.get(password, None)
+        
         return jsonify({"msg": "error signing up"}), 401
         
         access_token = create_access_token(identity=email)
