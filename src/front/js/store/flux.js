@@ -39,9 +39,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           const resp = await fetch(
             "https://3001-christianma-authenticat-8a7ewi7r7zw.ws-eu47.gitpod.io/api/token",
             opts
-            
       )
-
+    
           if (resp.status !== 200) {
             alert("there's an error before the 200");
             return false;
@@ -106,6 +105,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             "https://3001-christianma-authenticat-8a7ewi7r7zw.ws-eu47.gitpod.io/api/hello",
             opts
           );
+          
           const data = await resp.json();
           setStore({ message: data.message });
           // don't forget to return something, that is how the async resolves
