@@ -13,23 +13,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 api = Blueprint('api', __name__)
 
-@api.route("/token", methods=["POST"])
-def create_token():
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-   
-    queryResult = session.query(User).filter(User.email == email)
-    if len(queryResult) == 0:
-        return jsonify({"msg": "user does not exist"}), 404
-    else : 
-        user = queryResult[0]
-        # if this passes all good - get the token
-        hash_password = generate_password_hash(password)
-        if hash_password == user.password:
-            access_token = create_access_token(identity=email)
-            return jsonify(access_token=access_token)
-        else : 
-            return jsonify({"msg": "wrong password"}), 400
 
 
 @api.route("/hello", methods=["GET"])
@@ -69,5 +52,22 @@ def createNewUser():
         # if email == request.json.get(user.email) - need to check that the user doesn't already exist and then throw an error using a conditional
         
         return jsonify({"msg": "error signing up"}), 401
-        
-       
+
+@api.route("/token", methods=["POST"])
+def create_token():
+    request_body = request.get_json(force=True)
+    email = request_body['email']
+    password = request_body['password']
+
+    user = User.query.filter_by(email=email).first()
+
+    if user == None:
+        return jsonify({"msg": "user does not exist"}), 404
+    else:
+        # if this passes all good - get the token
+        hash_password = generate_password_hash(password)
+        if hash_password == user.password:
+            access_token = create_access_token(identity=email)
+            return jsonify(access_token=access_token)
+        else:
+            return jsonify({"msg": "wrong password"}), 400

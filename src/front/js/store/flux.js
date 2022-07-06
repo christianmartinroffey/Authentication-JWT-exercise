@@ -37,7 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-christianma-authenticat-8a7ewi7r7zw.ws-eu47.gitpod.io/api/token",
+            "https://3001-christianma-authenticat-h91xs7x5ni5.ws-eu51.gitpod.io/api/token",
             opts
       )
     
@@ -67,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            " https://3001-christianma-authenticat-8a7ewi7r7zw.ws-eu47.gitpod.io/api/signup",
+            "https://3001-christianma-authenticat-h91xs7x5ni5.ws-eu51.gitpod.io/api/signup",
             opts
           );
          
@@ -82,7 +82,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ token: data.access_token });
           return true;
         } catch (error) {
-          console.log("there's an error logging in ");
+          console.log("there's an error creating the account");
         }
       },
 
@@ -102,7 +102,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         try {
           // fetching data from the backend
           const resp = await fetch(
-            "https://3001-christianma-authenticat-8a7ewi7r7zw.ws-eu47.gitpod.io/api/hello",
+            "https://3001-christianma-authenticat-h91xs7x5ni5.ws-eu51.gitpod.io/api/hello",
             opts
           );
           

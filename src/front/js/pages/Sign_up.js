@@ -13,7 +13,7 @@ function Sign_up() {
 
     const handleClick = () => {
       // this needs changing from login to signup in flux.js - also needs an end point creating in routes.py
-      actions.login(email, password);
+      actions.newUser(email, password);
   };
 
   
