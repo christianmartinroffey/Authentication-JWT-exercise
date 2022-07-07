@@ -13,8 +13,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 api = Blueprint('api', __name__)
 
-
-
+# protect page end point
 @api.route("/hello", methods=["GET"])
 @jwt_required()
  
@@ -45,11 +44,7 @@ def createNewUser():
         except exc.SQLAlchemyError:
             return jsonify({"msg": "user already exists"}), 400
             
-            pass # do something intelligent here
-
-    # if not (then the conditions that we're adding into sign up form)
-
-        # if email == request.json.get(user.email) - need to check that the user doesn't already exist and then throw an error using a conditional
+            pass 
         
         return jsonify({"msg": "error signing up"}), 401
 
