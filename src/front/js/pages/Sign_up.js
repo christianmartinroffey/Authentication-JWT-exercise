@@ -12,7 +12,6 @@ function Sign_up() {
     console.log("new user created", token)
 
     const handleClick = () => {
-      // this needs changing from login to signup in flux.js - also needs an end point creating in routes.py
       actions.newUser(email, password);
   };
 

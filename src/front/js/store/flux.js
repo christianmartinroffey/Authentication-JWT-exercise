@@ -37,10 +37,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-christianma-authenticat-km8cu1z7lxa.ws-eu51.gitpod.io/api/token",
+            "https://3001-christianma-authenticat-km8cu1z7lxa.ws-eu53.gitpod.io/api/token",
             opts
       )
-    
+      
           if (resp.status !== 200) {
             alert("there's an error before the 200");
             return false;
@@ -67,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-christianma-authenticat-km8cu1z7lxa.ws-eu51.gitpod.io/api/signup",
+            "https://3001-christianma-authenticat-km8cu1z7lxa.ws-eu53.gitpod.io/api/signup",
             opts
           );
          
@@ -102,7 +102,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         try {
           // fetching data from the backend
           const resp = await fetch(
-            "https://3001-christianma-authenticat-km8cu1z7lxa.ws-eu51.gitpod.io/api/hello",
+            "https://3001-christianma-authenticat-km8cu1z7lxa.ws-eu53.gitpod.io/api/hello",
             opts
           );
           
