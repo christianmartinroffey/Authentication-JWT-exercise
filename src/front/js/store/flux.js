@@ -72,7 +72,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
          
 
-          if (resp.status !== 200) {
+          if (resp.status !== 201) {
             alert("there's an error before the 200");
             return false;
           }
@@ -85,6 +85,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("there's an error creating the account");
         }
       },
+      
+      setToken: () => {
+
+				const token = localStorage.getItem("token") || null;
+				setStore(token);
+			},
 
       logout: () => {
         localStorage.removeItem("token");
@@ -105,7 +111,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             "https://3001-christianma-authenticat-km8cu1z7lxa.ws-eu53.gitpod.io/api/hello",
             opts
           );
-          
           
           const data = await resp.json();
           setStore({ message: data.message });
