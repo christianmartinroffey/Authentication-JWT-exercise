@@ -26,12 +26,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       login: async (email, password) => {
         const opts = {
           method: "POST",
-          headers: { "Content-Type": "application/json",
-          
-         },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             email: email,
-            password: password,
+            password: password
           }),
         };
 
@@ -41,8 +39,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             opts
       )
       
-          if (resp.status !== 200) {
-            alert("there's an error before the 200");
+          if (resp.status !== 201) {
+            alert("there's an error before the 201");
             return false;
           }
           const data = await resp.json();
@@ -85,7 +83,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("there's an error creating the account");
         }
       },
-      
+
       setToken: () => {
 
 				const token = localStorage.getItem("token") || null;
