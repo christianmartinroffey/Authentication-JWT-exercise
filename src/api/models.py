@@ -17,3 +17,12 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
+    
+    @staticmethod
+    def get_with_credentials(email, password):
+        return User.query.filter_by(email=email).filter_by(password=password).first()
+
+    @classmethod
+    def get_by_email(cls, email):
+        user = cls.query.filter_by(email=email).one_or_none()
+        return user

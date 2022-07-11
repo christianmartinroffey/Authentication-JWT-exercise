@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
+import { useHistory } from "react-router-dom";
 
 
 function Sign_up() {
@@ -10,11 +11,13 @@ function Sign_up() {
     const [password, setPassword] = useState ("");
     const token = localStorage.getItem("token");
     console.log("new user created", token)
-
+    const history = useHistory();
+    
     const handleClick = () => {
       actions.newUser(email, password);
   };
 
+  if(token && token != "" && token != undefined) history.push("/hello");
   
   return (
       <div className="text-center mt-5">

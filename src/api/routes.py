@@ -55,19 +55,30 @@ def createNewUser():
 
 @api.route("/token", methods=["POST"])
 def create_token():
-    request_body = request.get_json(force=True)
-    email = request_body['email']
-    password = request_body['password']
-
-    user = User.query.filter_by(email=email).first()
-
-    if user == None:
-        return jsonify({"msg": "user does not exist"}), 404
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+   
+    user = User.get_by_email(email)
+    if user and check_password_hash(user.password, password):
+        access_token = create_access_token(identity=email)
+        return {"access token": access_token},201
     else:
-        # if this passes all good - get the token
-        hash_password = generate_password_hash(password)
-        if hash_password == user.password:
-            access_token = create_access_token(identity=email)
-            return jsonify(access_token=access_token)
-        else:
-            return jsonify({"msg": "wrong password"}), 400
+        return {"error":"user and password not valid"},400
+    # request_body = request.get_json(force=True)
+    # email = request_body['email']
+    # password = request_body['password']
+
+    # user = User.query.filter_by(email=email).first()
+
+    # if user == None:
+    #     return jsonify({"msg": "user does not exist"}), 404
+    # else:
+    #     # if this passes all good - get the token
+    #     hash_password = generate_password_hash(password)
+    #     if hash_password == user.password:
+    #         access_token = create_access_token(identity=email)
+    #         return jsonify(access_token=access_token)
+    #     else:
+    #         return jsonify({"msg": "wrong password"}), 400
+
+
